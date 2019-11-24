@@ -1,17 +1,15 @@
 ---
-- name: Install system dependencies for {{ ansible_os_family }}
-  apt:
-    name: curl
-    state: present
-    update_cache: yes
+- include_tasks: setup-RedHat.yml
+  when: ansible_os_family == 'RedHat'
+
+- include_tasks: setup-Ubuntu.yml
+  when: ansible_distribution == 'Ubuntu'
+
+- include_tasks: setup-Debian.yml
   when: ansible_os_family == 'Debian'
 
-- name: Install system dependencies for {{ ansible_os_family }}
-  yum:
-    name: curl
-    state: present
-    update_cache: yes
-  when: ansible_os_family == 'RedHat'
+- include_tasks: setup-Archlinux.yml
+  when: ansible_os_family == 'Archlinux'
 
 - name: Install v2ray using official setup script
   shell: |

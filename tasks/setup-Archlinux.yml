@@ -1,0 +1,6 @@
+---
+- name: Ensure curl is installed
+  pacman:
+    name: curl
+    state: present
+    update_cache: yes
