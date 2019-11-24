@@ -1,17 +1,18 @@
 ---
-- include_tasks: setup-RedHat.yml
+- name: Install Red Hat system specific packages
+  include_tasks: setup-RedHat.yml
   when: ansible_os_family == 'RedHat'
 
-- include_tasks: setup-Ubuntu.yml
-  when: ansible_distribution == 'Ubuntu'
-
-- include_tasks: setup-Debian.yml
+- name: Install Debian system specific packages
+  include_tasks: setup-Debian.yml
   when: ansible_os_family == 'Debian'
 
-- include_tasks: setup-Archlinux.yml
+- name: Install Arch Linux system specific packages
+  include_tasks: setup-Archlinux.yml
   when: ansible_os_family == 'Archlinux'
 
 - name: Install v2ray using official setup script
+  become: true
   shell: |
     set -o pipefail
     curl -Ls https://install.direct/go.sh | sudo bash
@@ -23,7 +24,7 @@
 - name: Update config.json
   become: true
   template:
-    src: "{{ config_json_path | default('config.j2') }}"
+    src: "{{ v2ray_config_json_path | default('config.j2') }}"
     dest: /etc/v2ray/config.json
     owner: root
     group: root

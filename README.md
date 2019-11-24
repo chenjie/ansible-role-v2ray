@@ -17,10 +17,17 @@ Default Configs
 | AlterId | `4` |
 | Encryption | `auto` |
 
-Requirements
+Tested Platforms
 ------------
 
-Ansible
+- Red Hat UBI 8
+- CentOS 7
+- CentOS 8
+- Ubuntu 16.04
+- Ubuntu 18.04
+- Debian 8
+- Debian 9
+- Debian 10
 
 Role Variables
 --------------
