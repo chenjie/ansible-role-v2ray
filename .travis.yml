@@ -4,29 +4,30 @@ services: docker
 
 env:
   global:
-    - ROLE_NAME: v2ray
+  - ROLE_NAME: v2ray
+
   matrix:
-    - MOLECULE_DISTRO: ubi8
-    - MOLECULE_DISTRO: centos7
-    - MOLECULE_DISTRO: centos6
-    - MOLECULE_DISTRO: ubuntu1804
-    - MOLECULE_DISTRO: ubuntu1604
-    - MOLECULE_DISTRO: ubuntu1404
-    - MOLECULE_DISTRO: ubuntu1204
-    - MOLECULE_DISTRO: debian10
-    - MOLECULE_DISTRO: debian9
-    - MOLECULE_DISTRO: debian8
+  - MOLECULE_DISTRO: ubi8
+  - MOLECULE_DISTRO: centos7
+  - MOLECULE_DISTRO: centos6
+  - MOLECULE_DISTRO: ubuntu1804
+  - MOLECULE_DISTRO: ubuntu1604
+  - MOLECULE_DISTRO: ubuntu1404
+  - MOLECULE_DISTRO: ubuntu1204
+  - MOLECULE_DISTRO: debian10
+  - MOLECULE_DISTRO: debian9
+  - MOLECULE_DISTRO: debian8
 
 install:
-  - pip install molecule docker
+- pip install molecule docker
 
 before_script:
-  - cd ../
-  - mv ansible-role-$ROLE_NAME jellycsc.$ROLE_NAME
-  - cd jellycsc.$ROLE_NAME
+- cd ../
+- mv ansible-role-$ROLE_NAME jellycsc.$ROLE_NAME
+- cd jellycsc.$ROLE_NAME
 
 script:
-  - molecule test
+- molecule test
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
