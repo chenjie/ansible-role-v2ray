@@ -4,6 +4,7 @@
     set -o pipefail
     curl -Ls https://install.direct/go.sh | sudo bash
   args:
+    executable: /bin/bash
     creates: /usr/bin/v2ray/v2ray
     warn: no
 
