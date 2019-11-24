@@ -1,0 +1,16 @@
+---
+- name: Install v2ray using official setup script
+  shell: curl -Ls https://install.direct/go.sh | sudo bash
+  args:
+    warn: no
+
+- name: Update config.json
+  become: true
+  template:
+    src: "{{ config_json_path | default('config.j2') }}"
+    dest: /etc/v2ray/config.json
+    owner: root
+    group: root
+    mode: '0644'
+  notify:
+  - restart v2ray

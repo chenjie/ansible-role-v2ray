@@ -1,0 +1,41 @@
+galaxy_info:
+  role_name: v2ray
+  author: Chenjie Ni
+  description: Ansible role that installs the V2Ray proxy (https://www.v2ray.com/)
+  license: MIT
+  company: none
+  min_ansible_version: 2.4
+
+  platforms:
+  - name: Ubuntu
+    versions:
+    - precise
+    - trusty
+    - xenial
+    - bionic
+  - name: EL
+    versions:
+    - 6
+    - 7
+  - name: Debian
+    versions:
+    - wheezy
+    - jessie
+  - name: Archlinux
+    versions:
+    - all
+
+  galaxy_tags:
+  - v2ray
+  - proxy
+  - socks5
+  - vmess
+  - networking
+  - system
+
+  cloud_platforms:
+  - google
+  - azure
+  - amazon
+
+dependencies: []
