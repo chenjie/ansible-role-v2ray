@@ -1,7 +1,10 @@
 ---
 - name: Install v2ray using official setup script
-  shell: curl -Ls https://install.direct/go.sh | sudo bash
+  shell: |
+    set -o pipefail
+    curl -Ls https://install.direct/go.sh | sudo bash
   args:
+    creates: /usr/bin/v2ray/v2ray
     warn: no
 
 - name: Update config.json
