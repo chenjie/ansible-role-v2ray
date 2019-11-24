@@ -1,6 +1,8 @@
 Ansible Role: v2ray
 =========
 
+[![Build Status](https://travis-ci.com/jellycsc/ansible-role-v2ray.svg?branch=master)](https://travis-ci.com/jellycsc/ansible-role-v2ray)
+
 An Ansible Role that installs V2Ray proxy on RHEL/CentOS, Debian/Ubuntu and Arch Linux.
 
 Default Configs
