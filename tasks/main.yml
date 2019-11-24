@@ -1,4 +1,18 @@
 ---
+- name: Install system dependencies for {{ ansible_os_family }}
+  apt:
+    name: curl
+    state: present
+    update_cache: yes
+  when: ansible_os_family == 'Debian'
+
+- name: Install system dependencies for {{ ansible_os_family }}
+  yum:
+    name: curl
+    state: present
+    update_cache: yes
+  when: ansible_os_family == 'RedHat'
+
 - name: Install v2ray using official setup script
   shell: |
     set -o pipefail
