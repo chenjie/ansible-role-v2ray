@@ -1,5 +1,5 @@
 ---
 - name: restart v2ray
-  service:
+  systemd:
     name: v2ray
     state: restarted
