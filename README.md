@@ -51,4 +51,4 @@ License
 Author Information
 ------------------
 
-This role was created by [Chenjie Ni](https://nichenjie.com)
+This role was created by [Chenjie Ni](https://nichenjie.com).
