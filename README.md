@@ -34,7 +34,7 @@ Role Variables
 
 You can set your custom `config.json` path:
 
-    config_json_path: "path/to/config.json"
+    v2ray_config_json_path: "path/to/config.json"
 
 Dependencies
 ------------
