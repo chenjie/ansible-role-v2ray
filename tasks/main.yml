@@ -6,15 +6,15 @@
 
 - name: Install Red Hat system specific packages
   include_tasks: setup-RedHat.yml
-  when: ansible_os_family == 'RedHat' and v2ray_executable.stat.exists|d(False) == False
+  when: ansible_os_family == 'RedHat' and (not v2ray_executable.stat.exists|d(False))
 
 - name: Install Debian system specific packages
   include_tasks: setup-Debian.yml
-  when: ansible_os_family == 'Debian' and v2ray_executable.stat.exists|d(False) == False
+  when: ansible_os_family == 'Debian' and (not v2ray_executable.stat.exists|d(False))
 
 - name: Install Arch Linux system specific packages
   include_tasks: setup-Archlinux.yml
-  when: ansible_os_family == 'Archlinux' and v2ray_executable.stat.exists|d(False) == False
+  when: ansible_os_family == 'Archlinux' and (not v2ray_executable.stat.exists|d(False))
 
 - name: Install v2ray using official setup script
   become: true
@@ -41,7 +41,7 @@
       src: /etc/v2ray/config.json
       dest: /etc/v2ray/config.json.backup
       remote_src: yes
-    when: config_json.stat.exists|d(False) == True
+    when: config_json.stat.exists|d(False)
   - name: Update config.json
     template:
       src: "{{ v2ray_config_json_path | default('config.j2') }}"
@@ -61,7 +61,7 @@
     file:
       path: /etc/v2ray/config.json.backup
       state: absent
-    when: config_json.stat.exists|d(False) == True
+    when: config_json.stat.exists|d(False)
   rescue:
   - debug:
       msg: 'Invalid config.json detected. Please check and try again.'
@@ -71,7 +71,7 @@
     register: config_json_backup
   - name: Backup does not exist
     command: /bin/false
-    when: config_json_backup.stat.exists|d(False) == False
+    when: not config_json_backup.stat.exists|d(False)
   - name: Restore config.json
     copy:
       src: /etc/v2ray/config.json.backup
