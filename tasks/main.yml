@@ -32,57 +32,19 @@
 - name: Check, update config.json and restart v2ray
   become: true
   block:
-  - name: Check if config.json exists
-    stat:
-      path: /etc/v2ray/config.json
-    register: config_json
-  - name: Back up config.json
-    copy:
-      src: /etc/v2ray/config.json
-      dest: /etc/v2ray/config.json.backup
-      remote_src: yes
-    when: config_json.stat.exists|d(False)
-  - name: Update config.json
+  - name: Make sure config.json has desired content
     template:
       src: "{{ v2ray_config_json_path | default('config.j2') }}"
       dest: /etc/v2ray/config.json
       owner: root
       group: root
       mode: '0644'
+    register: config_json
   - name: Check config.json syntax
     command: /usr/bin/v2ray/v2ray -test -config=/etc/v2ray/config.json
-    register: result
-    failed_when: not (result.rc == 0)
-  - name: Restart v2ray service
-    command: /bin/true
+    register: check_result
+    failed_when: not (check_result.rc == 0)
+    when: config_json.changed
     notify:
     - restart v2ray
-  - name: Clean up backup
-    file:
-      path: /etc/v2ray/config.json.backup
-      state: absent
-    when: config_json.stat.exists|d(False)
-  rescue:
-  - debug:
-      msg: 'Invalid config.json detected. Please check and try again.'
-  - name: Check if config.json.backup exists
-    stat:
-      path: /etc/v2ray/config.json.backup
-    register: config_json_backup
-  - name: Backup does not exist
-    command: /bin/false
-    when: not config_json_backup.stat.exists|d(False)
-  - name: Restore config.json
-    copy:
-      src: /etc/v2ray/config.json.backup
-      dest: /etc/v2ray/config.json
-      remote_src: yes
-  - name: Restart v2ray service
-    command: /bin/true
-    notify:
-    - restart v2ray
-  - name: Clean up backup
-    file:
-      path: /etc/v2ray/config.json.backup
-      state: absent
   when: update_v2ray_config_json
