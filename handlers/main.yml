@@ -4,11 +4,6 @@
     name: v2ray
     state: restarted
 
-- name: reload v2ray
-  systemd:
-    name: v2ray
-    state: reloaded
-
 - name: stop v2ray
   systemd:
     name: v2ray

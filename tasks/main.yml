@@ -29,7 +29,7 @@
   - start v2ray
   - enable v2ray
 
-- name: Check, update config.json and reload v2ray
+- name: Check, update config.json and restart v2ray
   become: true
   block:
   - name: Check if config.json exists
@@ -50,13 +50,13 @@
       group: root
       mode: '0644'
   - name: Check config.json syntax
-    command: /usr/bin/v2ray/v2ray -test
+    command: /usr/bin/v2ray/v2ray -test -config=/etc/v2ray/config.json
     register: result
     failed_when: not (result.rc == 0)
-  - name: Reload v2ray service
+  - name: Restart v2ray service
     command: /bin/true
     notify:
-    - reload v2ray
+    - restart v2ray
   - name: Clean up backup
     file:
       path: /etc/v2ray/config.json.backup
@@ -77,10 +77,10 @@
       src: /etc/v2ray/config.json.backup
       dest: /etc/v2ray/config.json
       remote_src: yes
-  - name: Reload v2ray service
+  - name: Restart v2ray service
     command: /bin/true
     notify:
-    - reload v2ray
+    - restart v2ray
   - name: Clean up backup
     file:
       path: /etc/v2ray/config.json.backup
