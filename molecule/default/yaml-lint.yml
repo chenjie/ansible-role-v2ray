@@ -4,7 +4,7 @@ rules:
   indentation:
     indent-sequences: false
   truthy:
-    allowed-values: ['true', 'false', 'yes', 'no']
+    allowed-values: ['true', 'True', 'false', 'False', 'yes', 'no']
   line-length:
     max: 120
     level: warning
