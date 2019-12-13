@@ -2,5 +2,7 @@
 - name: Converge
   hosts: all
   become: true
+  vars:
+    update_v2ray_config_json: True
   roles:
   - role: jellycsc.v2ray

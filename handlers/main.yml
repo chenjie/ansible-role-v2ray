@@ -3,3 +3,23 @@
   systemd:
     name: v2ray
     state: restarted
+
+- name: reload v2ray
+  systemd:
+    name: v2ray
+    state: reloaded
+
+- name: stop v2ray
+  systemd:
+    name: v2ray
+    state: stopped
+
+- name: start v2ray
+  systemd:
+    name: v2ray
+    state: started
+
+- name: enable v2ray
+  systemd:
+    name: v2ray
+    enabled: yes
