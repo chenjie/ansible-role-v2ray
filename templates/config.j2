@@ -1,12 +1,1 @@
-{
-  "log": {{ log | default({}) | to_nice_json(indent=2) | indent(2) }},
-  "api": {{ api | default({}) | to_nice_json(indent=2) | indent(2) }},
-  "dns": {{ dns | default({}) | to_nice_json(indent=2) | indent(2) }},
-  "stats": {{ stats | default({}) | to_nice_json(indent=2) | indent(2) }},
-  "routing": {{ routing | default({}) | to_nice_json(indent=2) | indent(2) }},
-  "policy": {{ policy | default({}) | to_nice_json(indent=2) | indent(2) }},
-  "reverse": {{ reverse | default({}) | to_nice_json(indent=2) | indent(2) }},
-  "inbounds": {{ inbounds | default([]) | to_nice_json(indent=2) | indent(2) }},
-  "outbounds": {{ outbounds | default([]) | to_nice_json(indent=2) | indent(2) }},
-  "transport": {{ transport | default({}) | to_nice_json(indent=2) | indent(2) }}
-}
+{{ v2ray_config | to_nice_json(indent=2) }}
