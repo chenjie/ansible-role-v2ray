@@ -20,7 +20,8 @@
   become: true
   shell: |
     set -o pipefail
-    curl -Ls https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh | sudo bash
+    curl -O https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh
+    bash install-release.sh
   args:
     executable: /bin/bash
     creates: /usr/local/bin/v2ray
