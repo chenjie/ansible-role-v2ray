@@ -4,3 +4,8 @@
     name: curl
     state: present
     update_cache: yes
+
+- name: Ensure unzip is installed
+  yum:
+    name: unzip
+    state: present
