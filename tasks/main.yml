@@ -20,8 +20,7 @@
   become: true
   shell: |
     set -o pipefail
-    curl -O https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh
-    bash install-release.sh
+    curl -Ls https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh | bash
   args:
     executable: /bin/bash
     creates: /usr/local/bin/v2ray
@@ -36,13 +35,13 @@
     - name: Make sure config.json has desired content
       template:
         src: "{{ v2ray_config_json_path | default('config.j2') }}"
-        dest: /etc/v2ray/config.json
+        dest: /usr/local/etc/v2ray/config.json
         owner: root
         group: root
         mode: "0644"
       register: config_json
     - name: Check config.json syntax
-      command: /usr/local/bin/v2ray -test -config=/etc/v2ray/config.json
+      command: /usr/local/bin/v2ray -test -config=/usr/local/etc/v2ray/config.json
       register: check_result
       failed_when: not (check_result.rc == 0)
       when: config_json.changed
