@@ -6,6 +6,6 @@
     update_cache: yes
 
 - name: Ensure unzip is installed
-  yum:
+  pacman:
     name: unzip
     state: present
